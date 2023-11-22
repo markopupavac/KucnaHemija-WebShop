@@ -26,3 +26,12 @@ export async function getOrders() {
 
   return porudzbine;
 }
+
+export async function deletePorudzbina(id) {
+  const { error } = await supabase.from("porudzbine").delete().eq("id", id);
+
+  if (error) {
+    console.error(error);
+    throw new Error("Porudzbina se ne moze obrisati");
+  }
+}

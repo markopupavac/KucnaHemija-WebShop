@@ -71,10 +71,6 @@ const Button = styled.button`
 `;
 
 const FileInput = styled.input`
-  display: none;
-`;
-
-const FileInputLabel = styled.label`
   cursor: pointer;
   background-color: #dab900;
   color: black;
@@ -92,49 +88,39 @@ function AddItem() {
   const { register, handleSubmit, reset } = useForm();
   const queryClient = useQueryClient();
 
-  const [fileName, setFileName] = useState("");
-
   const { mutate, isLoading: isCreating } = useMutation({
     mutationFn: addProizvod,
     onSuccess: () => {
       toast.success("Proizvod usepesno dodat");
       queryClient.invalidateQueries({ queryKey: ["proizvodi"] });
       reset();
-      setFileName("");
     },
     onError: (err) => toast.error(err.message),
   });
 
   function onSubmit(data) {
+    console.log(data);
     mutate({ ...data, Slika: data.Slika[0] });
   }
-
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setFileName(file.name);
-    }
-  };
 
   return (
     <Div>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <label htmlFor="Naziv">Naziv: </label>
         <Input type="text" id="Naziv" {...register("Naziv")} />
+
         <label htmlFor="Kategorija">Kategorija </label>
         <Input type="text" id="Kategorija" {...register("Kategorija")} />
+
         <label htmlFor="Cena">Cena: </label>
         <Input type="number" id="Cena" {...register("Cena")} />
+
         <FileInput
           type="file"
           id="Slika"
           accept="image/*"
           {...register("Slika")}
-          onChange={handleFileChange}
         />
-        <FileInputLabel htmlFor="Slika">
-          {fileName || "Izaberi sliku"}
-        </FileInputLabel>
 
         <Button disabled={isCreating} type="submit">
           Submit

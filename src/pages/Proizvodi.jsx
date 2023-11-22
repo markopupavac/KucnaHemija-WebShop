@@ -12,11 +12,21 @@ const Div = styled.div`
 
 function Proizvodi() {
   const [show, setShow] = useState(false);
+  const [selectedCategory, setSelectedCategory] = useState(null);
+
+  const handleCategoryClick = (category) => {
+    setSelectedCategory(category);
+  };
 
   return (
     <Div>
-      <SidebarMenu setShow={setShow} />
-      {show && <ProizvodiTabela show={show} />}
+      <SidebarMenu
+        setShow={setShow}
+        handleCategoryClick={handleCategoryClick}
+      />
+      {show && (
+        <ProizvodiTabela show={show} selectedCategory={selectedCategory} />
+      )}
     </Div>
   );
 }

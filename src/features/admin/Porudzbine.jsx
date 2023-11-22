@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { getOrders } from "../../services/apiPorudzbina";
 import { useQuery } from "@tanstack/react-query";
+import DeletePorudzbina from "./DeletePorudzbina";
 
 const StyledDiv = styled.div`
   flex: 8;
@@ -11,10 +12,7 @@ const StyledDiv = styled.div`
   align-items: center;
 `;
 const StyledTable = styled.table`
-  width: 100%;
   border-collapse: collapse;
-  padding-left: 2rem;
-  padding-right: 2rem;
 
   th,
   td {
@@ -41,7 +39,7 @@ const StyledTable = styled.table`
   }
 `;
 const TableContainer = styled.div`
-  width: 70rem;
+  width: 75rem;
   height: 40rem;
   margin-bottom: 5rem;
   background-color: #234a57;
@@ -56,6 +54,10 @@ const TableContainer = styled.div`
   border-radius: 19px;
   background: #234a57;
   box-shadow: 29px 29px 48px #142a32, -29px -29px 48px #326a7c;
+`;
+const Div = styled.div`
+  width: 80%;
+  height: 80%;
 `;
 
 function Porudzbine() {
@@ -80,34 +82,41 @@ function Porudzbine() {
   return (
     <StyledDiv>
       <TableContainer>
-        <StyledTable>
-          <thead>
-            <tr>
-              <th>Naziv</th>
-              <th>Telefon</th>
-              <th>Adresa</th>
-              <th>Proizvodi</th>
-            </tr>
-          </thead>
-          <tbody>
-            {porudzbine.map((order) => (
-              <tr key={order.id}>
-                <td>{order.naziv}</td>
-                <td>{order.telefon}</td>
-                <td>{order.adresa}</td>
-                <td>
-                  <ul className="proizvodi">
-                    {order.proizvodi.map((proizvod, index) => (
-                      <li key={index} className="proizvod">
-                        {proizvod.Naziv} ({proizvod.Kolicina}x)
-                      </li>
-                    ))}
-                  </ul>
-                </td>
+        <Div>
+          <StyledTable>
+            <thead>
+              <tr>
+                <th>Naziv</th>
+                <th>Telefon</th>
+                <th>Adresa</th>
+                <th>Proizvodi</th>
+                <th>Ukupna cena</th>
               </tr>
-            ))}
-          </tbody>
-        </StyledTable>
+            </thead>
+            <tbody>
+              {porudzbine.map((order) => (
+                <tr key={order.id}>
+                  <td>{order.naziv}</td>
+                  <td>{order.telefon}</td>
+                  <td>{order.adresa}</td>
+                  <td>
+                    <ul className="proizvodi">
+                      {order.proizvodi.map((proizvod, index) => (
+                        <li key={index} className="proizvod">
+                          {proizvod.Naziv} ({proizvod.Kolicina}x)
+                        </li>
+                      ))}
+                    </ul>
+                  </td>
+                  <td>{order.ukupnaCena}</td>
+                  <td>
+                    <DeletePorudzbina porudzbine={order} />
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </StyledTable>
+        </Div>
       </TableContainer>
     </StyledDiv>
   );

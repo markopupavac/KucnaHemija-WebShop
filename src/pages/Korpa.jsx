@@ -124,7 +124,7 @@ function Korpa() {
       <Racun>Ukupna cena: {formatCurrency(racun)}.00 </Racun>
 
       <StyledButton onClick={() => navigate("/korpa/poruci")}>
-        Poruci
+        Nastavi plaćanje
       </StyledButton>
     </StyledDiv>
   );

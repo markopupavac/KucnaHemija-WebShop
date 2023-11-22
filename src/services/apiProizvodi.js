@@ -28,8 +28,6 @@ export async function addProizvod(newProizvod) {
 
   const imagePath = `${supabaseUrl}/storage/v1/object/public/Slike/${imageName}`;
 
-  //https://vqjvqrgzyhtddyesmzms.supabase.co/storage/v1/object/public/Slike/lenor.jpg?t=2023-11-21T20%3A06%3A49.771Z
-
   const { data, error } = await supabase
     .from("proizvodi")
     .insert([{ ...newProizvod, Slika: imagePath }])
@@ -48,6 +46,16 @@ export async function addProizvod(newProizvod) {
     await supabase.from("proizvodi").delete().eq("id", data.id);
     console.error(storageError);
     throw new Error("Proizvod slika se ne moze dodati");
+  }
+
+  return data;
+}
+export async function getKategorijaProizvoda() {
+  let { data, error } = await supabase.from("proizvodi").select("Kategorija");
+
+  if (error) {
+    console.error(error);
+    throw new Error("Kategorije se ne mogu ocitati");
   }
 
   return data;

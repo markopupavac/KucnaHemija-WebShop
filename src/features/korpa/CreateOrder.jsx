@@ -6,7 +6,7 @@ import { useForm } from "react-hook-form";
 import { useMutation } from "@tanstack/react-query";
 import { createOrder } from "../../services/apiPorudzbina";
 import toast from "react-hot-toast";
-import { clearCart, getCart } from "./cartSlice";
+import { clearCart, getCart, getUkupanRacun } from "./cartSlice";
 
 const StyledDiv = styled.div`
   background-color: #ffffff;
@@ -88,6 +88,7 @@ function CreateOrder() {
   const cart = useSelector(getCart);
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const finalPrice = useSelector(getUkupanRacun);
 
   const { register, handleSubmit, reset } = useForm();
   console.log(cart);
@@ -114,6 +115,7 @@ function CreateOrder() {
     const orderData = {
       ...data,
       proizvodi: orderItems,
+      ukupnaCena: finalPrice,
     };
 
     mutateOrder(orderData);
@@ -124,7 +126,7 @@ function CreateOrder() {
     <StyledDiv>
       <MenuOrder>
         <StyledLink onClick={() => navigate(-1)}>
-          &lt; Vrati se na korpu
+          &lt; Nastaviti kupovinu
         </StyledLink>
       </MenuOrder>
       <div>
@@ -137,6 +139,7 @@ function CreateOrder() {
             type="number"
             id="Cena"
             required
+            placeholder="06x/xxx-xx-xx"
             {...register("telefon")}
           />
           <label htmlFor="adresa">Lokacija: </label>
@@ -148,7 +151,7 @@ function CreateOrder() {
           />
 
           <Button disabled={isCreating} type="submit">
-            Submit
+            Poruči
           </Button>
         </StyledForm>
       </div>

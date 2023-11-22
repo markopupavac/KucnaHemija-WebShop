@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import styled from "styled-components";
 import { getProizvodi } from "../../services/apiProizvodi";
@@ -15,27 +16,27 @@ const Tabela = styled.div`
   overflow: auto;
 `;
 
-function ProizvodTabela() {
-  const {
-    isLoading,
-    data: proizvodi,
-    error,
-  } = useQuery({
+function ProizvodTabela({ selectedCategory }) {
+  const { isLoading, data, error } = useQuery({
     queryKey: ["proizvodi"],
     queryFn: getProizvodi,
   });
 
   if (isLoading) {
-    return <SpinnerMini />; // or any loading indicator
+    return <SpinnerMini />;
   }
 
   if (error) {
     return <div>Error: {error.message}</div>;
   }
 
+  const filteredProducts = data.filter((proizvod) => {
+    return !selectedCategory || proizvod.Kategorija === selectedCategory;
+  });
+
   return (
     <Tabela>
-      {proizvodi.map((proizvod) => (
+      {filteredProducts.map((proizvod) => (
         <ProizvodItem proizvod={proizvod} key={proizvod.id} />
       ))}
     </Tabela>

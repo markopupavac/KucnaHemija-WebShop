@@ -31,20 +31,17 @@ const DescContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  gap: 5px;
 `;
 const StyledH1 = styled.h1`
   font-size: 1.2em;
   font-weight: bold;
   margin-right: 1em;
   line-height: 1.5em;
-  padding-bottom: 10px;
   align-self: flex-start;
 `;
 const CenaContainer = styled.div`
   color: red;
   font-size: 1.5em;
-  padding-top: 10px;
   font-weight: bold;
 `;
 const DinKom = styled.span`
@@ -52,7 +49,7 @@ const DinKom = styled.span`
 `;
 
 const Korpa = styled.div`
-  margin: 2em 0.5em;
+  margin: 1em 0.5em;
   display: flex;
   justify-content: center;
 `;
