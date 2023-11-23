@@ -7,6 +7,7 @@ import AddItem from "../features/admin/AddItem";
 import { useState } from "react";
 import ObrisiProizvod from "../features/admin/ObrisiProizvod";
 import Porudzbine from "../features/admin/Porudzbine";
+import AnimatedPage from "../ui/AnimatedPage";
 
 const Main = styled.div`
   background-color: #ffffff;
@@ -50,39 +51,41 @@ function AdminPage() {
   const [showPorudzbine, setShowPorudzbine] = useState(false);
 
   return (
-    <Main>
-      <Navbar>
-        <Logotext>
-          <Link to="/">
-            <Logo />
-          </Link>
-          admin panel
-        </Logotext>
-        <Logout />
-      </Navbar>
-      <ContentDiv>
-        <AdminSidebar
-          setShowAddItems={() => {
-            setShowAddItems(true);
-            setDeleteItems(false);
-            setShowPorudzbine(false);
-          }}
-          setDeleteItems={() => {
-            setDeleteItems(true);
-            setShowAddItems(false);
-            setShowPorudzbine(false);
-          }}
-          setShowPorudzbine={() => {
-            setShowPorudzbine(true);
-            setShowAddItems(false);
-            setDeleteItems(false);
-          }}
-        />
-        {showAddItems && <AddItem />}
-        {showDeleteItems && <ObrisiProizvod />}
-        {showPorudzbine && <Porudzbine />}
-      </ContentDiv>
-    </Main>
+    <AnimatedPage>
+      <Main>
+        <Navbar>
+          <Logotext>
+            <Link to="/">
+              <Logo />
+            </Link>
+            admin panel
+          </Logotext>
+          <Logout />
+        </Navbar>
+        <ContentDiv>
+          <AdminSidebar
+            setShowAddItems={() => {
+              setShowAddItems(true);
+              setDeleteItems(false);
+              setShowPorudzbine(false);
+            }}
+            setDeleteItems={() => {
+              setDeleteItems(true);
+              setShowAddItems(false);
+              setShowPorudzbine(false);
+            }}
+            setShowPorudzbine={() => {
+              setShowPorudzbine(true);
+              setShowAddItems(false);
+              setDeleteItems(false);
+            }}
+          />
+          {showAddItems && <AddItem />}
+          {showDeleteItems && <ObrisiProizvod />}
+          {showPorudzbine && <Porudzbine />}
+        </ContentDiv>
+      </Main>
+    </AnimatedPage>
   );
 }
 

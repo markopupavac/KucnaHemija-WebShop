@@ -3,7 +3,7 @@ import supabase from "./supabase";
 export async function createOrder(newOrder) {
   const { data, error } = await supabase
     .from("porudzbine")
-    .insert(newOrder)
+    .insert([newOrder])
     .select();
 
   if (error) {

@@ -3,6 +3,7 @@ import { useState } from "react";
 import SidebarMenu from "../ui/SidebarMenu";
 import ProizvodiTabela from "../features/proizvod/ProizvodTabela";
 import styled from "styled-components";
+import AnimatedPage from "../ui/AnimatedPage";
 
 const Div = styled.div`
   display: flex;
@@ -19,15 +20,17 @@ function Proizvodi() {
   };
 
   return (
-    <Div>
-      <SidebarMenu
-        setShow={setShow}
-        handleCategoryClick={handleCategoryClick}
-      />
-      {show && (
-        <ProizvodiTabela show={show} selectedCategory={selectedCategory} />
-      )}
-    </Div>
+    <AnimatedPage>
+      <Div>
+        <SidebarMenu
+          setShow={setShow}
+          handleCategoryClick={handleCategoryClick}
+        />
+        {show && (
+          <ProizvodiTabela show={show} selectedCategory={selectedCategory} />
+        )}
+      </Div>
+    </AnimatedPage>
   );
 }
 

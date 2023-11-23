@@ -87,8 +87,11 @@ function Porudzbine() {
             <thead>
               <tr>
                 <th>Naziv</th>
+                <th>Ulica i broj</th>
+                <th>Grad/Naselje</th>
+                <th>Postanski broj</th>
                 <th>Telefon</th>
-                <th>Adresa</th>
+                <th>Napomene</th>
                 <th>Proizvodi</th>
                 <th>Ukupna cena</th>
               </tr>
@@ -97,8 +100,11 @@ function Porudzbine() {
               {porudzbine.map((order) => (
                 <tr key={order.id}>
                   <td>{order.naziv}</td>
+                  <td>{order.ulica_broj}</td>
+                  <td>{order.grad_naselje}</td>
+                  <td>{order.postanski_broj}</td>
                   <td>{order.telefon}</td>
-                  <td>{order.adresa}</td>
+                  <td>{order.napomene}</td>
                   <td>
                     <ul className="proizvodi">
                       {order.proizvodi.map((proizvod, index) => (

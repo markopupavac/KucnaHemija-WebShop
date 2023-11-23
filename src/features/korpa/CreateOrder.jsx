@@ -7,6 +7,7 @@ import { useMutation } from "@tanstack/react-query";
 import { createOrder } from "../../services/apiPorudzbina";
 import toast from "react-hot-toast";
 import { clearCart, getCart, getUkupanRacun } from "./cartSlice";
+import AnimatedPage from "../../ui/AnimatedPage";
 
 const StyledDiv = styled.div`
   background-color: #ffffff;
@@ -47,6 +48,8 @@ const StyledForm = styled.form`
   display: flex;
   justify-content: center;
   flex-direction: column;
+  gap: 7px;
+  margin-top: 1rem;
 `;
 
 const Button = styled.button`
@@ -67,9 +70,28 @@ const Button = styled.button`
 
 const StyledInput = styled.input`
   border: 2px solid transparent;
-  width: 15em;
+  width: 100%;
   height: 2.5em;
   padding-left: 0.8em;
+  outline: none;
+  overflow: hidden;
+  background-color: #f3f3f3; //f3f3f3
+  border-radius: 10px;
+  transition: all 0.5s;
+
+  &:hover,
+  &:focus {
+    border: 2px solid #4a9dec;
+    box-shadow: 0px 0px 0px 7px rgb(74, 157, 236, 20%);
+    background-color: white;
+  }
+`;
+
+const StyledTextarea = styled.textarea`
+  border: 2px solid transparent;
+  width: 100%;
+  height: 6em; /* Adjust height based on your preference */
+  padding: 0.8em;
   outline: none;
   overflow: hidden;
   background-color: #f3f3f3;
@@ -83,6 +105,8 @@ const StyledInput = styled.input`
     background-color: white;
   }
 `;
+
+const NapomeneLabel = styled.label``;
 
 function CreateOrder() {
   const cart = useSelector(getCart);
@@ -123,39 +147,73 @@ function CreateOrder() {
   };
 
   return (
-    <StyledDiv>
-      <MenuOrder>
-        <StyledLink onClick={() => navigate(-1)}>
-          &lt; Nastaviti kupovinu
-        </StyledLink>
-      </MenuOrder>
-      <div>
-        <StyledForm onSubmit={handleSubmit(onSubmit)}>
-          <label htmlFor="naziv">Ime i Prezime:</label>
-          <StyledInput type="text" id="Naziv" required {...register("naziv")} />
+    <AnimatedPage>
+      <StyledDiv>
+        <MenuOrder>
+          <StyledLink onClick={() => navigate(-1)}>
+            &lt; Nastaviti kupovinu
+          </StyledLink>
+        </MenuOrder>
+        <div>
+          <StyledForm onSubmit={handleSubmit(onSubmit)}>
+            <label htmlFor="naziv">Ime i Prezime</label>
+            <StyledInput
+              type="text"
+              id="Naziv"
+              required
+              {...register("naziv")}
+            />
 
-          <label htmlFor="telefon">Telefon: </label>
-          <StyledInput
-            type="number"
-            id="Cena"
-            required
-            placeholder="06x/xxx-xx-xx"
-            {...register("telefon")}
-          />
-          <label htmlFor="adresa">Lokacija: </label>
-          <StyledInput
-            htmlFor="Lokacija"
-            type="text"
-            {...register("adresa")}
-            required
-          />
+            <label htmlFor="ulica_broj">Ulica i broj</label>
+            <StyledInput
+              id="ulica_broj"
+              placeholder="Ulica i kućni broj"
+              type="text"
+              {...register("ulica_broj")}
+              required
+            />
 
-          <Button disabled={isCreating} type="submit">
-            Poruči
-          </Button>
-        </StyledForm>
-      </div>
-    </StyledDiv>
+            <label htmlFor="grad_naselje">Grad / Naselje</label>
+            <StyledInput
+              id="grad_naselje"
+              type="text"
+              {...register("grad_naselje")}
+              required
+            />
+
+            <label htmlFor="postanski_broj">Poštanski broj</label>
+            <StyledInput
+              id="postanski_broj"
+              type="text"
+              {...register("postanski_broj")}
+              required
+            />
+
+            <label htmlFor="telefon">Telefon </label>
+            <StyledInput
+              type="number"
+              id="telefon"
+              required
+              placeholder="06x/xxx-xx-xx"
+              {...register("telefon")}
+            />
+
+            <NapomeneLabel htmlFor="napomene">
+              Napomene o porudžbini (optional)
+            </NapomeneLabel>
+            <StyledTextarea
+              id="napomene"
+              placeholder="Napomene o porudžbini,zahtevi o isporuci i sl."
+              type="textbox"
+              {...register("napomene")}
+            />
+            <Button disabled={isCreating} type="submit">
+              Poruči
+            </Button>
+          </StyledForm>
+        </div>
+      </StyledDiv>
+    </AnimatedPage>
   );
 }
 

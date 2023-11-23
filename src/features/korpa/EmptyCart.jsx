@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import AnimatedPage from "../../ui/AnimatedPage";
 
 const StyledLink = styled(Link)`
   background-color: whitesmoke;
@@ -37,11 +38,15 @@ const Paragraf = styled.p`
 
 function EmptyCart() {
   return (
-    <StyledDiv>
-      <StyledLink to="/proizvodi">&lt; Vrati se na proizvode</StyledLink>
+    <AnimatedPage>
+      <StyledDiv>
+        <StyledLink to="/proizvodi">&lt; Vrati se na proizvode</StyledLink>
 
-      <Paragraf className="mt-7 font-semibold">Vaša korpa je prazna.</Paragraf>
-    </StyledDiv>
+        <Paragraf className="mt-7 font-semibold">
+          Vaša korpa je prazna.
+        </Paragraf>
+      </StyledDiv>
+    </AnimatedPage>
   );
 }
 

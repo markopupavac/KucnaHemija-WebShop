@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { useLogin } from "../features/admin/useLogin";
 import SpinnerMini from "../ui/SpinnerMini";
 import { useUser } from "../features/admin/useUser";
+import AnimatedPage from "../ui/AnimatedPage";
 
 const Container = styled.form`
   display: flex;
@@ -119,33 +120,35 @@ function LoginForm() {
   );
 
   return (
-    <DIV>
-      <StyledLink to="/">Vrati se nazad</StyledLink>
-      <Container onSubmit={handleSubmit}>
-        <H1>Admin panel</H1>
-        <Input
-          type="email"
-          id="email"
-          autoComplete="username"
-          value={email}
-          placeholder="Username"
-          onChange={(e) => setEmail(e.target.value)}
-          disabled={isLoading}
-        />
-        <Input
-          type="password"
-          id="password"
-          placeholder="Password"
-          autoComplete="current-password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          disabled={isLoading}
-        />
-        <Button size="large" disabled={isLoading}>
-          {!isLoading ? "Log in" : <SpinnerMini />}
-        </Button>
-      </Container>
-    </DIV>
+    <AnimatedPage>
+      <DIV>
+        <StyledLink to="/">Vrati se nazad</StyledLink>
+        <Container onSubmit={handleSubmit}>
+          <H1>Admin panel</H1>
+          <Input
+            type="email"
+            id="email"
+            autoComplete="username"
+            value={email}
+            placeholder="Username"
+            onChange={(e) => setEmail(e.target.value)}
+            disabled={isLoading}
+          />
+          <Input
+            type="password"
+            id="password"
+            placeholder="Password"
+            autoComplete="current-password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            disabled={isLoading}
+          />
+          <Button size="large" disabled={isLoading}>
+            {!isLoading ? "Log in" : <SpinnerMini />}
+          </Button>
+        </Container>
+      </DIV>
+    </AnimatedPage>
   );
 }
 

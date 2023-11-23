@@ -5,6 +5,7 @@ import { getProizvodi } from "../../services/apiProizvodi";
 import ProizvodItem from "./ProizvodItem";
 import { useQuery } from "@tanstack/react-query";
 import SpinnerMini from "../../ui/SpinnerMini";
+import AnimatedPage from "../../ui/AnimatedPage";
 
 const Tabela = styled.div`
   background-color: rgb(255, 255, 255);

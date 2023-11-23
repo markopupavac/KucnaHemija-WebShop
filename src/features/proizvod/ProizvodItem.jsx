@@ -20,7 +20,7 @@ const Container = styled.div`
   margin: 10px;
 `;
 const ImgContainer = styled.img`
-  height: 160px;
+  max-height: 160px;
   width: 300px;
   background-color: transparent;
   display: flex;

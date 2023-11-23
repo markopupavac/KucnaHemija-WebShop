@@ -1,23 +1,24 @@
 import { Outlet } from "react-router-dom";
 import Header from "./Header";
 import styled from "styled-components";
-// import Footer from "./Footer";
-
+import AnimatedPage from "./AnimatedPage";
 const Main = styled.main``;
 
 const StyledDiv = styled.div``;
 
 function AppLayout() {
   return (
-    <StyledDiv>
-      <Header />
+    <AnimatedPage>
+      <StyledDiv>
+        <Header />
 
-      <Main>
-        <Outlet />
-      </Main>
+        <Main>
+          <Outlet />
+        </Main>
 
-      {/* <Footer /> */}
-    </StyledDiv>
+        {/* <Footer /> */}
+      </StyledDiv>
+    </AnimatedPage>
   );
 }
 

@@ -7,7 +7,7 @@ import SpinnerMini from "./SpinnerMini";
 
 const Sidebar = styled.div`
   background-color: #446084;
-  width: 23rem;
+  width: 20%;
 `;
 
 const CategoryButton = styled.button`
@@ -15,7 +15,7 @@ const CategoryButton = styled.button`
   padding: 10px 20px;
   margin: 50px 25px;
   border-radius: 10px;
-  width: calc(100% - 4rem);
+  width: calc(90% - 2rem);
   text-transform: uppercase;
   font-weight: bold;
   display: flex;

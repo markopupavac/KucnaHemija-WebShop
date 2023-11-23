@@ -11,11 +11,12 @@ import {
 } from "../features/korpa/cartSlice";
 import EmptyCart from "../features/korpa/EmptyCart";
 import formatCurrency from "../helpers/formatCurrency";
+import AnimatedPage from "../ui/AnimatedPage";
 
 const StyledDiv = styled.div`
   background-color: #ffffff;
   backdrop-filter: blur(10px);
-  height: 80vh;
+  min-height: 80vh;
   margin: 0 20% 0 20%;
   display: flex;
   flex-direction: column;
@@ -34,18 +35,27 @@ const StyledLink = styled(Link)`
   text-align: center;
 
   &:active {
-    transform: translateY(2px); /* Move the button down slightly when clicked */
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Optional: Add a subtle box shadow */
+    transform: translateY(2px);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
     background-color: #bebebe;
   }
+
+  @media (max-width: 600px) {
+    margin-bottom: 0.5em;
+  }
 `;
+
 const MenuKorpa = styled.div`
+  margin-top: 1em;
   display: flex;
   justify-content: space-between;
-  padding-top: 10px;
-  margin: 0em 1em 0em 1em;
-  padding-bottom: 10px;
+  padding: 10px;
   border-bottom: 1px solid black;
+
+  @media (max-width: 600px) {
+    flex-direction: column;
+    align-items: center;
+  }
 `;
 
 const OcistiDugme = styled.button`
@@ -57,44 +67,57 @@ const OcistiDugme = styled.button`
   border: 1px solid black;
 
   &:active {
-    transform: translateY(2px); /* Move the button down slightly when clicked */
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5); /* Optional: Add a subtle box shadow */
+    transform: translateY(2px);
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.5);
     background-color: #bebebe;
+  }
+
+  @media (max-width: 600px) {
+    margin-top: 0.5em;
   }
 `;
 
 const ItemContainer = styled.div`
-  width: auto;
-  margin-left: 2rem;
-  margin-right: 2rem;
+  width: 100%;
   background-color: #ffffff;
-  margin-top: 2em;
-  padding-bottom: 0.5rem;
+  margin-top: 1em;
+  padding-bottom: 0.5em;
   border-bottom: 1px dotted black;
+
+  @media (max-width: 600px) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 `;
 
 const Racun = styled.p`
-  padding-top: 1rem;
-  padding-left: 1rem;
+  padding: 1em;
   font-weight: bold;
 `;
 
 const StyledButton = styled.button`
   font-size: 1;
   padding: 10px;
-  margin-top: 1rem;
+  margin-top: 1em;
   font-weight: 500;
   border: none;
   border-radius: 5px;
   box-shadow: 0px 0.6rem 2.4rem rgba(0, 0, 0, 0.06);
   color: #eef2ff;
   background-color: #4f46e5;
+  transition: background-color 1s, transform 0.2s ease, box-shadow 0.3s;
 
   &:hover {
-    background-color: #446084;
+    background-color: #46a7e5;
+    transition: background-color 0.5s, font-size 0.5s ease;
+    font-weight: bold;
+    font-size: 18px;
   }
   &:active {
-    transform: translateY(2px);
+    transform: scale(0.95);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.3) inset;
+    background-color: #46a7e5;
   }
 `;
 
@@ -111,22 +134,23 @@ function Korpa() {
   if (!proizvodi.length) return <EmptyCart />;
 
   return (
-    <StyledDiv>
-      <MenuKorpa>
-        <StyledLink to="/proizvodi">&lt; Vrati se na proizvode</StyledLink>
-        <OcistiDugme onClick={handleDelete}>Ocisti korpu</OcistiDugme>
-      </MenuKorpa>
-      <ItemContainer>
-        {proizvodi.map((proizvod) => (
-          <KorpaItem proizvod={proizvod} key={proizvod.id} />
-        ))}
-      </ItemContainer>
-      <Racun>Ukupna cena: {formatCurrency(racun)}.00 </Racun>
-
-      <StyledButton onClick={() => navigate("/korpa/poruci")}>
-        Nastavi plaćanje
-      </StyledButton>
-    </StyledDiv>
+    <AnimatedPage>
+      <StyledDiv>
+        <MenuKorpa>
+          <StyledLink to="/proizvodi">&lt; Vrati se na proizvode</StyledLink>
+          <OcistiDugme onClick={handleDelete}>Ocisti korpu</OcistiDugme>
+        </MenuKorpa>
+        <ItemContainer>
+          {proizvodi.map((proizvod) => (
+            <KorpaItem proizvod={proizvod} key={proizvod.id} />
+          ))}
+        </ItemContainer>
+        <Racun>Ukupna cena: {formatCurrency(racun)}.00 </Racun>
+        <StyledButton onClick={() => navigate("/korpa/poruci")}>
+          Nastavi plaćanje
+        </StyledButton>
+      </StyledDiv>
+    </AnimatedPage>
   );
 }
 
